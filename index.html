@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAYCP Generator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#e5e7eb;
+padding:20px;
+}
+
+.wrapper{
+max-width:760px;
+margin:auto;
+background:#fff;
+border:1px solid #d1d5db;
+}
+
+.header{
+background:#2f353d;
+padding:12px;
+text-align:center;
+}
+
+.logo{
+font-size:70px;
+font-family:'Oswald',sans-serif;
+font-weight:700;
+color:#65ff00;
+text-shadow:0 2px 0 #000;
+line-height:1;
+}
+
+.slogan{
+color:white;
+font-size:18px;
+letter-spacing:3px;
+margin-top:5px;
+}
+
+.content{
+padding:18px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.input-box{
+margin-bottom:15px;
+}
+
+label{
+display:block;
+font-size:13px;
+margin-bottom:6px;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:10px;
+border:1px solid #cbd5e1;
+font-size:13px;
+outline:none;
+}
+
+textarea{
+resize:none;
+min-height:90px;
+}
+
+.tabs{
+display:flex;
+gap:2px;
+margin-top:10px;
+}
+
+.tab{
+background:#f3f4f6;
+padding:10px 20px;
+font-size:13px;
+border:1px solid #d1d5db;
+cursor:pointer;
+}
+
+.tab.active{
+background:white;
+}
+
+.notice{
+margin-top:15px;
+background:#d9f3f9;
+padding:14px;
+font-size:13px;
+border:1px solid #b6e5f0;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:12px 16px;
+font-size:13px;
+cursor:pointer;
+font-weight:600;
+margin-top:10px;
+}
+
+.preview{
+margin-top:20px;
+border:1px solid #d1d5db;
+background:white;
+max-width:450px;
+}
+
+.preview img{
+width:100%;
+height:220px;
+object-fit:cover;
+object-position:right center;
+display:block;
+}
+
+.preview-content{
+padding:14px;
+}
+
+.preview-domain{
+font-size:12px;
+color:#6b7280;
+margin-bottom:5px;
+}
+
+.preview-title{
+font-size:22px;
+font-weight:700;
+margin-bottom:8px;
+}
+
+.preview-desc{
+font-size:14px;
+color:#4b5563;
+line-height:1.5;
+}
+
+.result textarea{
+margin-top:10px;
+min-height:70px;
+}
+
+@media(max-width:768px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.logo{
+font-size:48px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="header">
+<div class="logo">RAYCP</div>
+<div class="slogan">• ONE FAMILY ONE GOAL •</div>
+</div>
+
+<div class="content">
+
+<div class="grid">
+
+<div class="input-box">
+<label>Domain</label>
+
+<select id="domainSelect">
+<option value="random">Random</option>
+<option>ucus.web.id</option>
+<option>camsuper.live</option>
+<option>camlive.com</option>
+</select>
+
+</div>
+
+<div class="input-box">
+<label>My Domain</label>
+
+<select>
+<option>ucus.web.id</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="input-box">
+<label>Allowed Country</label>
+<input type="text" value="ID, TH, US">
+</div>
+
+<div class="input-box">
+<label>Blocked Country</label>
+<input type="text" value="ID, TH, US">
+</div>
+
+</div>
+
+<div class="input-box">
+<label>Bit.ly Key</label>
+
+<div class="grid">
+
+<input type="text" placeholder="API KEY">
+
+<select>
+<option>bit.ly</option>
+<option>tinyurl</option>
+<option>cutt.ly</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="tabs">
+
+<div class="tab active"
+onclick="switchTab('basic',this)">
+Basic
+</div>
+
+<div class="tab"
+onclick="switchTab('fake',this)">
+Fake Url
+</div>
+
+<div class="tab"
+onclick="switchTab('content',this)">
+Content
+</div>
+
+</div>
+
+<div id="basicTab">
+
+<div class="notice">
+Facebook, Twitter and Google will read this content.
+</div>
+
+</div>
+
+<div id="fakeTab"
+style="display:none; margin-top:15px;">
+
+<div class="input-box">
+<label>Raw URL Redirect</label>
+
+<input type="text"
+id="rawurl"
+placeholder="https://link.tr7.com/...">
+</div>
+
+</div>
+
+<div id="contentTab"
+style="display:none; margin-top:15px;">
+
+<div class="notice">
+Konten preview sosial untuk Threads/Facebook/WhatsApp
+</div>
+
+</div>
+
+<div class="input-box" style="margin-top:15px;">
+<label>As App</label>
+
+<select>
+<option>Instagram</option>
+<option>WhatsApp</option>
+<option>Facebook</option>
+</select>
+
+</div>
+
+<div class="input-box">
+<label>Title</label>
+
+<input type="text"
+id="title"
+value="Grup WhatsApp">
+
+</div>
+
+<div class="input-box">
+<label>Description</label>
+
+<textarea id="desc">
+Ruang Gadis Nakal WhatsApp Naughty Group
+</textarea>
+
+</div>
+
+<div class="input-box">
+<label>Keywords</label>
+
+<input type="text"
+placeholder="viral, whatsapp">
+</div>
+
+<div class="input-box">
+<label>Image</label>
+
+<input type="file"
+id="imageInput"
+accept="image/*">
+
+</div>
+
+<button onclick="generateLink()">
+⚙ Generate Link
+</button>
+
+<div class="result">
+
+<textarea id="resultLink"></textarea>
+
+</div>
+
+<div class="preview">
+
+<img id="previewImg"
+src="https://picsum.photos/800/500">
+
+<div class="preview-content">
+
+<div class="preview-domain"
+id="previewDomain">
+https://ucus.web.id/93haww
+</div>
+
+<div class="preview-title"
+id="previewTitle">
+Grup WhatsApp
+</div>
+
+<div class="preview-desc"
+id="previewDesc">
+Ruang Gadis Nakal WhatsApp Naughty Group
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const domains=[
+'ucus.web.id',
+'camsuper.live',
+'camlive.com'
+];
+
+function randomSlug(length=6){
+
+const chars=
+'abcdefghijklmnopqrstuvwxyz0123456789';
+
+let result='';
+
+for(let i=0;i<length;i++){
+
+result+=chars.charAt(
+Math.floor(Math.random()*chars.length)
+);
+
+}
+
+return result;
+
+}
+
+function generateLink(){
+
+const domainSelect=
+document.getElementById('domainSelect').value;
+
+const domain=
+domainSelect==='random'
+? domains[Math.floor(Math.random()*domains.length)]
+: domainSelect;
+
+const slug=randomSlug();
+
+const finalLink=
+'https://'+domain+'/'+slug;
+
+document.getElementById('resultLink').value=
+finalLink;
+
+document.getElementById('previewDomain').innerText=
+finalLink;
+
+document.getElementById('previewTitle').innerText=
+document.getElementById('title').value;
+
+document.getElementById('previewDesc').innerText=
+document.getElementById('desc').value;
+
+}
+
+function switchTab(tab,el){
+
+document.querySelectorAll('.tab')
+.forEach(t=>t.classList.remove('active'));
+
+el.classList.add('active');
+
+document.getElementById('basicTab').style.display='none';
+document.getElementById('fakeTab').style.display='none';
+document.getElementById('contentTab').style.display='none';
+
+if(tab==='basic'){
+document.getElementById('basicTab').style.display='block';
+}
+
+if(tab==='fake'){
+document.getElementById('fakeTab').style.display='block';
+}
+
+if(tab==='content'){
+document.getElementById('contentTab').style.display='block';
+}
+
+}
+
+document.getElementById('imageInput')
+.addEventListener('change',function(){
+
+const file=this.files[0];
+
+if(file){
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+document.getElementById('previewImg').src=
+e.target.result;
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
