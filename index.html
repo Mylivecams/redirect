@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -229,23 +230,6 @@ font-size:48px;
 
 </div>
 
-<div class="input-box">
-<label>Bit.ly Key</label>
-
-<div class="grid">
-
-<input type="text" placeholder="API KEY">
-
-<select>
-<option>bit.ly</option>
-<option>tinyurl</option>
-<option>cutt.ly</option>
-</select>
-
-</div>
-
-</div>
-
 <div class="tabs">
 
 <div class="tab active"
@@ -359,7 +343,7 @@ src="https://picsum.photos/800/500">
 
 <div class="preview-domain"
 id="previewDomain">
-https://ucus.web.id/93haww
+https://mylivecams.github.io/redirect/
 </div>
 
 <div class="preview-title"
@@ -409,6 +393,9 @@ return result;
 
 function generateLink(){
 
+const rawurl =
+document.getElementById('rawurl').value;
+
 const domainSelect=
 document.getElementById('domainSelect').value;
 
@@ -419,14 +406,15 @@ domainSelect==='random'
 
 const slug=randomSlug();
 
-const finalLink=
-'https://'+domain+'/'+slug;
+const finalLink =
+'https://mylivecams.github.io/redirect/?url='
++ encodeURIComponent(rawurl);
 
 document.getElementById('resultLink').value=
 finalLink;
 
 document.getElementById('previewDomain').innerText=
-finalLink;
+'https://'+domain+'/'+slug;
 
 document.getElementById('previewTitle').innerText=
 document.getElementById('title').value;
@@ -483,7 +471,24 @@ reader.readAsDataURL(file);
 
 });
 
+const params =
+new URLSearchParams(window.location.search);
+
+const url = params.get('url');
+
+if(url){
+
+setTimeout(()=>{
+
+window.location.href =
+decodeURIComponent(url);
+
+},1000);
+
+}
+
 </script>
 
 </body>
 </html>
+```
